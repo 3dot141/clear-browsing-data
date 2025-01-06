@@ -3,6 +3,7 @@ const optionKeys = [
   'disabledDataTypes',
   'clearAllDataTypesAction',
   'clearSince',
+  'onlyCurrentTab',
   'closeTabs',
   'closePinnedTabs',
   'reloadTabs',

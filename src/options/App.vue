@@ -112,6 +112,12 @@
             v-model="options.confirmDataRemoval"
           ></vn-switch>
         </div>
+        <div class="option">
+          <vn-switch
+            :label="getText('optionTitle_onlyCurrentTab')"
+            v-model="options.onlyCurrentTab"
+          ></vn-switch>
+        </div>
         <div class="option" v-if="enableContributions">
           <vn-switch
             :label="getText('optionTitle_showContribPage')"
@@ -217,6 +223,7 @@ export default {
         notifyOnSuccess: false,
         showDataTypeIcons: false,
         confirmDataRemoval: false,
+        onlyCurrentTab: false,
         appTheme: false,
         showContribPage: false
       }

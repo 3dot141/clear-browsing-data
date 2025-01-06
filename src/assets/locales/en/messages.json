@@ -329,6 +329,11 @@
     "description": "Value of the option."
   },
 
+  "optionTitle_onlyCurrentTab": {
+    "message": "Only current tab",
+    "description": "Title of the option."
+  },
+
   "optionTitle_clearSince": {
     "message": "Time range",
     "description": "Title of the option."
@@ -506,6 +511,11 @@
 
   "buttonTooltip_clearSince": {
     "message": "Time range",
+    "description": "Tooltip of the button."
+  },
+
+  "buttonTooltip_onlyCurrentTab": {
+    "message": "Only current tab",
     "description": "Tooltip of the button."
   },
 

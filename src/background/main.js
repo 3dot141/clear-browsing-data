@@ -30,7 +30,13 @@ async function clearDataType(dataType, options = null, enDataTypes = null) {
     options = await storage.get(optionKeys);
   }
 
-  await processAppUse({showContribPage: options.closeTabs !== 'exit'});
+  const {id: activeTabId, url: activeTabUrl} = await getActiveTab();
+  
+  let removeOptions = {};
+  if (options.onlyCurrentTab) {
+    const hostname = new URL(activeTabUrl).hostname;
+    removeOptions.hostnames = [hostname];
+  }
 
   let since;
   if (options.clearSince === 'epoch') {
@@ -88,7 +94,6 @@ async function clearDataType(dataType, options = null, enDataTypes = null) {
   }
 
   let tempTabId;
-  const {id: activeTabId} = await getActiveTab();
   const android = await isAndroid();
 
   if (options.closeTabs !== 'false') {
@@ -170,7 +175,13 @@ async function clearDataType(dataType, options = null, enDataTypes = null) {
       delete dataTypes.localStorage;
     }
     if (Object.keys(dataTypes).length) {
-      await browser.browsingData.remove({since}, dataTypes);
+      await browser.browsingData.remove({
+        ...removeOptions,
+        since: since
+      }, dataTypes);
+      
+      // 重新加载当前标签页
+      await browser.tabs.reload(activeTabId, {bypassCache: true});
     }
   } catch (err) {
     await showNotification({
